@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { ReactFlow, useNodesState, Background, BackgroundVariant } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
@@ -7,6 +7,18 @@ import TaskNode from './components/TaskNode';
 import AddTaskForm from './components/AddTaskForm';
 import { initialNodes, QUADRANT_POSITIONS } from './data/initialNodes';
 
+const STORAGE_KEY = 'eisenhower-matrix-nodes';
+
+function loadNodes() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) return JSON.parse(saved);
+  } catch {
+    // ignore
+  }
+  return initialNodes;
+}
+
 // Defined at module scope to prevent React Flow re-mount warning
 const nodeTypes = {
   quadrantNode: QuadrantNode,
@@ -14,7 +26,11 @@ const nodeTypes = {
 };
 
 export default function App() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState(loadNodes);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(nodes));
+  }, [nodes]);
 
   const addTask = useCallback((label) => {
     const inboxTasks = nodes.filter(
