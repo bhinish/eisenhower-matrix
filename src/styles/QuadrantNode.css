@@ -1,0 +1,40 @@
+.quadrant-node {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.quadrant-header {
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.quadrant-title {
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+
+.quadrant-subtitle {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 2px;
+}
+
+.quadrant-body {
+  flex: 1;
+}
+
+.quadrant-q1 .quadrant-body  { background: #fef2f2; }
+.quadrant-q2 .quadrant-body  { background: #eff6ff; }
+.quadrant-q3 .quadrant-body  { background: #fefce8; }
+.quadrant-q4 .quadrant-body  { background: #f9fafb; }
+.quadrant-inbox .quadrant-body { background: #f8fafc; }
